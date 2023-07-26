@@ -1,3 +1,8 @@
+**CASE 1
+Create a View called “forestation” by joining all three tables - forest_area, land_area and regions in the workspace
+
+
+
 CREATING A VIEW 
 
 CREATE VIEW forestation 
@@ -19,6 +24,8 @@ AND  f.year = l.year)
 
 
 
+** CASE 2 What was the total forest area (in sq km) of the world in 1990?
+Please keep in mind that you can use the country record denoted as “World" in the region table.
 
 
 Answer – A -- Global Situation
@@ -29,6 +36,8 @@ FROM      forestation
 WHERE    country_name = 'World' 
 AND year = 1990;
 
+**CASE 3 What was the total forest area (in sq km) of the world in 2016? 
+Please keep in mind that you can use the country record in the table is denoted as “World.”
 
 Answer – B – Global Situation 
 Result :39958245.9
@@ -44,6 +53,8 @@ FROM      forestation
 WHERE     year = '1990'
 AND        country_name <> 'World';
 
+
+**CASE 4  What was the change (in sq km) in the forest area of the world from 1990 to 2016?
 
 Answer – C – Global Situation 
 Result  : 1324449
@@ -63,6 +74,7 @@ diff AS (SELECT year_2016, year_1990,year_2016 - year_1990 as diff
 SELECT diff from diff
 
 
+**CASE 5  What was the percent change in forest area of the world between 1990 and 2016?
 
 Answer – D – Global Situation 
 Result :  3.3145824351614 – ROUND ( 3%)
@@ -86,6 +98,12 @@ Round (( ( year_1990 - year_2016 ) / year_2016 ) * 100)  AS
 FROM    fore_1990
 CROSS JOIN    fore_2016;
 
+
+
+
+
+**CASE 5  If you compare the amount of forest area lost between 1990 and 2016, 
+to which country's total area in 2016 is it closest to?
 
 Answer – E – Global Situation 
 Result : Peru - 1324449 
@@ -138,6 +156,10 @@ LIMIT 1;
 
 
 
+
+**CASE 6 Create a table that shows the Regions and their percent forest area (sum of forest area divided by sum of land area) in 1990 and 2016. 
+(Note that 1 sq mi = 2.59 sq km).Based on the table you created, ....
+
 Answer – TABLE ( 2.1 ) – Regional Outlook 
 ** All the fill in the blank answers  are based on  table ( 2.1 )  created above  from below Query. 
 
@@ -177,9 +199,10 @@ FROM     forest_percentage;
 
 
 
-
+**CASE 7 What was the percent forest of the entire world in 2016? Which region had the HIGHEST percent forest in 2016? 
+and which had the LOWEST, to 2 decimal places?
 Answer – A – Country Level  Details 
-Result : Top  5 Amount Decrease in Forest
+Result : Top  5 Amount Decrease in Forest 
 
 SELECT   country_name
       AS
@@ -211,6 +234,8 @@ ORDER BY      absolute_forest_area_change   DESC
 LIMIT 5;
 
 
+** CASE 8 What was the percent forest of the entire world in 1990? Which region had the HIGHEST percent forest in 1990?
+and which had the LOWEST, to 2 decimal places?
 
 Answer – B – Country Level Detail 
 Result  :  Top 5 Percent Decrease in Forest 
@@ -247,7 +272,7 @@ GROUP BY f.country_name,
 ORDER BY percentage_forest_area_change   DESC   nulls last LIMIT 5;
 
 
-
+**CASE 9   If countries were grouped by percent forestation in quartiles, which group had the most countries in it in 2016?
 
 Answer – C – Country Level Detail
 
@@ -268,7 +293,7 @@ GROUP BY     quartiles
 ORDER BY      quartiles 
 
 
-
+**CASE 10 List all of the countries that were in the 4th quartile (percent forest > 75%) in 2016.
 Answer – D – Country Level Detail
 
 Result  :  9 countries 
@@ -293,7 +318,7 @@ WHERE f.year = 2016
 
 
 
-
+** CASE 10  How many countries had a percent forestation higher than the United States in 2016?
 
 
 Answer – E – Country Level Detail 
